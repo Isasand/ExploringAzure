@@ -12,8 +12,8 @@ namespace Quenes
     {
         static void Main(string[] args)
         {
-            var connectionString = "Endpoint=sb://isasspace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=+ZGnzBDo8pgFWBOyyHhaywMeopvZQpx7oFA+LclLbOw="; 
-            var queueName = "cSharpQueue";
+            var connectionString = ""; 
+            var queueName = "";
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
 
             client.OnMessage(message =>
