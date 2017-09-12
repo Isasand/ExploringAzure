@@ -35,7 +35,29 @@ namespace Quenes
             var namespaceManager = Microsoft.ServiceBus.NamespaceManager.CreateFromConnectionString(connectionString);
 
             bool rename = true;
+            Console.Write("Input new queue name: ");
+            queueName = Console.ReadLine();
+            Console.WriteLine("\nCreating Queue '{0}'...", queueName);
 
+
+
+            if (namespaceManager.QueueExists(queueName))
+            {
+                Console.WriteLine("Queue exists, replace (1) or rename (2)");
+                if (Console.ReadLine() == "1")
+                {
+                    namespaceManager.DeleteQueue(queueName);
+                    rename = false;
+                }
+                else
+                {
+                    Console.Write("Input new queue name: ");
+                    queueName = Console.ReadLine();
+
+                }
+            }
+
+            namespaceManager.CreateQueue(queueName);
 
             var client = QueueClient.CreateFromConnectionString(connectionString, queueName);
 
